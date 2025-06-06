@@ -5,7 +5,6 @@ var gravity = 2500
 
 var direction = 0
 var last_direction = 1
-
 var speed = 900
 var acceleration = 1500
 var friction = 1500
@@ -47,12 +46,11 @@ var coyote_timer = 0
 var late_jump_time = 0.1
 var late_jump_timer = 0
 
-enum Act{IDLE, RUN, JUMP, FALL, WALLCLING}
-var skating = false
+enum Act{IDLE, WALK, RUN, JUMPING, FALLING, WALLHUG, CROUCH, SLIDE, SPINATTACK}
 var current_act: Act = Act.IDLE
 var previous_act: Act = Act.IDLE
 
-func _unhandled_input(_event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("B"):
 		if crouching:
 			velocity.x = sliding_speed * last_direction
@@ -60,17 +58,19 @@ func _unhandled_input(_event: InputEvent) -> void:
 		
 		if is_on_wall_only():
 			velocity.x = wall_kick_horzont_power * -cling_direction
-	
-	if Input.is_action_just_pressed("A"):
-		pass
 
 func _physics_process(delta: float) -> void:
 	update_movement(delta)
 	grav_down(delta)
 	jump(delta)
 	coyote_timing(delta)
+	update_acts(delta)
+	update_animation()
 	flip_sprite()
 	move_and_slide()
+
+func update_acts(delta: float) -> void:
+	pass
 
 func grav_down(delta: float) -> void:
 	if !wall_cling:
@@ -90,10 +90,22 @@ func update_movement(delta: float) -> void:
 		crouching = false
 	
 	if direction:
+		last_direction = direction
+		
 		if direction * velocity.x < 0: #turning around
 			velocity.x = move_toward(velocity.x, direction * speed, turn_acceleration * delta)
+		elif crouching: #crawling
+			velocity.x = move_toward(velocity.x, direction * crawl_speed, crawl_acceleration * delta)
+		elif abs(velocity.x) > run_speed_break: #speed break
+			velocity.x = move_toward(velocity.x, direction * run_speed, run_acceleration * delta)
 		else: #walking
 			velocity.x = move_toward(velocity.x, direction * speed, acceleration * delta)
+		
+		if is_on_wall_only():
+			wall_cling = true
+			cling_direction = last_direction
+		else:
+			wall_cling = false
 	else: #stopping
 		velocity.x = move_toward(velocity.x, 0, friction * delta)
 
@@ -102,9 +114,19 @@ func jump(delta: float) -> void:
 		if is_on_floor() or coyote_timer > 0:
 			velocity.y = -jump_power_initial
 			jump_timer = jump_time_max
+			
+		if wall_cling:
+			jump_timer = jump_time_max
+			hop_off = true
+			velocity.y = -wall_hop_power_initial
+			velocity.x = wall_hop_pushoff * -cling_direction
 	elif Input.is_action_pressed("A") and jump_timer > 0:
 		jump_timer -= delta
-		velocity.y = move_toward(velocity.y, -jump_distance, jump_power * delta)
+		
+		if !hop_off:
+			velocity.y = move_toward(velocity.y, -jump_distance, jump_power * delta)
+		else:
+			velocity.y = move_toward(velocity.y, -wall_hop_distance, wall_hop_power * delta)
 	else:
 		jump_timer = -1
 
@@ -114,8 +136,8 @@ func coyote_timing(delta: float) -> void:
 	else:
 		coyote_timer -= delta
 
+func update_animation() -> void:
+	pass
+
 func flip_sprite() -> void:
-	if velocity.x > 0:
-		pass
-	if velocity.x < 0:
-		pass
+	pass
