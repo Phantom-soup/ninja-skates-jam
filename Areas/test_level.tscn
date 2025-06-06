@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2fnxdhhdwaqb"]
+
+[ext_resource type="PackedScene" uid="uid://cdej1m8idku7x" path="res://Player/player.tscn" id="1_bvs0s"]
+[ext_resource type="PackedScene" uid="uid://dqbt2ds828nl7" path="res://TestStuff/BoundBox.tscn" id="2_c165a"]
+
+[node name="test_level" type="Node"]
+
+[node name="Player" parent="." instance=ExtResource("1_bvs0s")]
+position = Vector2(119, 119)
+
+[node name="StaticBody2D" parent="." instance=ExtResource("2_c165a")]
+position = Vector2(-20085, 421)
+scale = Vector2(1000, 1.455)
