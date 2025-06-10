@@ -1,13 +1,38 @@
-[gd_scene load_steps=3 format=3 uid="uid://c2fnxdhhdwaqb"]
+[gd_scene load_steps=9 format=3 uid="uid://c2fnxdhhdwaqb"]
 
 [ext_resource type="PackedScene" uid="uid://cdej1m8idku7x" path="res://Player/player.tscn" id="1_bvs0s"]
 [ext_resource type="PackedScene" uid="uid://dqbt2ds828nl7" path="res://TestStuff/BoundBox.tscn" id="2_c165a"]
+[ext_resource type="PackedScene" uid="uid://cdbo47orvolh1" path="res://Enemies/Acorn/Acorn.tscn" id="3_b3jxl"]
+[ext_resource type="PackedScene" uid="uid://db3dimfucjbfl" path="res://Enemies/Goober/goober.tscn" id="4_8qods"]
+[ext_resource type="PackedScene" uid="uid://bqfmik4ocs32r" path="res://Food/Burger/burger.tscn" id="5_72vim"]
+[ext_resource type="PackedScene" uid="uid://c1f6bphsrj08h" path="res://Food/CocaCola/cocacola.tscn" id="6_f365h"]
+[ext_resource type="PackedScene" uid="uid://bnh0ryfsefcpl" path="res://NPC/customer.tscn" id="7_s2eav"]
+[ext_resource type="PackedScene" uid="uid://cmcsf83nk6pu0" path="res://Enemies/Dapper/Dapper.tscn" id="8_7a5pt"]
 
 [node name="test_level" type="Node"]
 
 [node name="Player" parent="." instance=ExtResource("1_bvs0s")]
-position = Vector2(119, 119)
+position = Vector2(118, 118)
 
 [node name="StaticBody2D" parent="." instance=ExtResource("2_c165a")]
 position = Vector2(-20085, 421)
 scale = Vector2(1000, 1.455)
+
+[node name="Acorn" parent="." instance=ExtResource("3_b3jxl")]
+position = Vector2(293, 306)
+
+[node name="Goober" parent="." instance=ExtResource("4_8qods")]
+position = Vector2(-16, 397)
+
+[node name="Burger" parent="." instance=ExtResource("5_72vim")]
+position = Vector2(-195, 390)
+
+[node name="Coca Cola" parent="." instance=ExtResource("6_f365h")]
+position = Vector2(-262, 390)
+
+[node name="Customer" parent="." instance=ExtResource("7_s2eav")]
+position = Vector2(-346, 392)
+
+[node name="Dapper" parent="." instance=ExtResource("8_7a5pt")]
+position = Vector2(687, 381)
+waypoints = Array[Vector2]([Vector2(423, 381), Vector2(687, 381)])

@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://cdbo47orvolh1"]
+
+[ext_resource type="Script" uid="uid://b5kxgawageb5v" path="res://Enemies/Acorn/acorn.gd" id="1_1x43q"]
+[ext_resource type="Texture2D" uid="uid://05xyb1nmteq8" path="res://rush_sprtes.png" id="2_1x43q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mo8yb"]
+size = Vector2(16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jq62t"]
+atlas = ExtResource("2_1x43q")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tdfwh"]
+atlas = ExtResource("2_1x43q")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1nskl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jq62t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tdfwh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1x43q"]
+size = Vector2(120, 291)
+
+[node name="Acorn" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_1x43q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_mo8yb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_1nskl")
+
+[node name="DetectionArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+position = Vector2(1, 135.5)
+shape = SubResource("RectangleShape2D_1x43q")
+
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]

@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bnh0ryfsefcpl"]
+
+[ext_resource type="Script" uid="uid://dnj71qghyx66a" path="res://NPC/customer.gd" id="1_jusmp"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_53hn5"]
+load_path = "res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8iue6"]
+size = Vector2(34, 34)
+
+[node name="Customer" type="Area2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_jusmp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+position = Vector2(1.14441e-05, 1.14441e-05)
+scale = Vector2(0.242188, 0.242188)
+texture = SubResource("CompressedTexture2D_53hn5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_8iue6")

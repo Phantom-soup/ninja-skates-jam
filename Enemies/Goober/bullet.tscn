@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://dkm1abxcx3nh1"]
+
+[ext_resource type="Script" uid="uid://d3ifumu8nr1gm" path="res://Enemies/Goober/bullet.gd" id="1_8ajuh"]
+[ext_resource type="Texture2D" uid="uid://05xyb1nmteq8" path="res://rush_sprtes.png" id="2_ph5qa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0shvb"]
+size = Vector2(9, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0shvb"]
+atlas = ExtResource("2_ph5qa")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5wnmg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0shvb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Bullet" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_8ajuh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_0shvb")
+
+[node name="LifeTime" type="Timer" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-1, -2)
+scale = Vector2(1.375, 1.375)
+sprite_frames = SubResource("SpriteFrames_5wnmg")
+
+[connection signal="timeout" from="LifeTime" to="." method="_on_life_time_timeout"]

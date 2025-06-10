@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqfmik4ocs32r"]
+
+[ext_resource type="Script" uid="uid://bpusxdklyj3cr" path="res://Food/Burger/burger.gd" id="1_lpknb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nr4bl"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_53hn5"]
+load_path = "res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex"
+
+[node name="Burger" type="Area2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_lpknb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_nr4bl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-2.38419e-07, -2.38419e-07)
+scale = Vector2(0.128906, 0.128906)
+texture = SubResource("CompressedTexture2D_53hn5")
