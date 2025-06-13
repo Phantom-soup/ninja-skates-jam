@@ -14,6 +14,8 @@ func _physics_process(delta: float) -> void:
 	if collision:
 		if collision.get_collider().is_in_group("player"):
 			print("Player hit!")
+			var player = collision.get_collider()
+			player.take_knockback_from_direction(direction)
 			queue_free()
 		else:
 			queue_free()

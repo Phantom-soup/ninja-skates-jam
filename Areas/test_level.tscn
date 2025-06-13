@@ -22,7 +22,7 @@ scale = Vector2(1000, 1.455)
 position = Vector2(293, 306)
 
 [node name="Goober" parent="." instance=ExtResource("4_8qods")]
-position = Vector2(-16, 397)
+position = Vector2(63, 392)
 
 [node name="Burger" parent="." instance=ExtResource("5_72vim")]
 position = Vector2(-195, 390)
