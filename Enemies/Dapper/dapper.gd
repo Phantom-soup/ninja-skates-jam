@@ -3,6 +3,8 @@ extends CharacterBody2D
 @export var speed: float = 100.0
 @export var waypoints: Array[Vector2] = []
 
+@onready var hitbox = $Hitbox
+
 var current_index: int = 0
 var moving: bool = true
 

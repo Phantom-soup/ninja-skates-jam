@@ -23,6 +23,8 @@ func _physics_process(delta: float) -> void:
 			var collision = get_slide_collision(i)
 			if collision.get_collider().is_in_group("player"):
 				print("player hit")
+				var player = collision.get_collider()
+				player.take_knockback()
 				hide()
 				falling = false
 				velocity = Vector2.ZERO

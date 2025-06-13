@@ -46,6 +46,11 @@ var coyote_timer = 0
 var late_jump_time = 0.1
 var late_jump_timer = 0
 
+var is_knocked_back: bool = false
+var knockback_duration: float = 0.3
+var knockback_timer: float = 0.0
+var knockback_vector: Vector2 = Vector2.ZERO
+
 enum Act{IDLE, WALK, RUN, JUMPING, FALLING, WALLHUG, CROUCH, SLIDE, SPINATTACK}
 var current_act: Act = Act.IDLE
 var previous_act: Act = Act.IDLE
@@ -60,6 +65,14 @@ func _unhandled_input(_event: InputEvent) -> void:
 			velocity.x = wall_kick_horzont_power * -cling_direction
 
 func _physics_process(delta: float) -> void:
+	if is_knocked_back:
+		velocity = knockback_vector
+		knockback_timer -= delta
+		if knockback_timer <= 0.0:
+			is_knocked_back = false
+		move_and_slide()
+		return
+	
 	update_movement(delta)
 	grav_down(delta)
 	jump(delta)
@@ -141,3 +154,19 @@ func update_animation() -> void:
 
 func flip_sprite() -> void:
 	pass
+
+func take_knockback(strength: float = 100.0, vertical_boost: float = -300.0) -> void:
+	if is_knocked_back:
+		return
+	is_knocked_back = true
+	knockback_timer = knockback_duration
+
+	knockback_vector = Vector2(-last_direction * strength, vertical_boost)
+
+func take_knockback_from_direction(dir: Vector2, strength: float = 100.0, vertical_boost: float = -300.0) -> void:
+	is_knocked_back = true
+	knockback_timer = knockback_duration
+
+	var knockback_dir = dir.normalized()
+	knockback_vector = knockback_dir * strength
+	knockback_vector.y += vertical_boost
