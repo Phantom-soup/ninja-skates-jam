@@ -34,7 +34,6 @@ shape = SubResource("RectangleShape2D_0shvb")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-1, -2)
-scale = Vector2(1.375, 1.375)
 sprite_frames = SubResource("SpriteFrames_5wnmg")
 
 [connection signal="timeout" from="LifeTime" to="." method="_on_life_time_timeout"]
