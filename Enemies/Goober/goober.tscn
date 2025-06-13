@@ -43,7 +43,6 @@ shape = SubResource("RectangleShape2D_atdr6")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-2.98023e-08, -2.98023e-08)
-scale = Vector2(2.9375, 2.9375)
 sprite_frames = SubResource("SpriteFrames_078e5")
 
 [node name="ShootTimer" type="Timer" parent="."]
