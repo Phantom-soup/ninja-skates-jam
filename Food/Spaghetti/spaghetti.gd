@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var item_id: String = "burger"
+@export var item_id: String = "spaghetti"
 
 var player_in_range: bool = false
 
