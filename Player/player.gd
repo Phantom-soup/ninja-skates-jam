@@ -36,7 +36,7 @@ var has_jumped = false
 var wall_hop_power_initial = 200
 var wall_hop_power = 1200
 var wall_hop_distance = 2500
-var wall_hop_pushoff = 600
+var wall_hop_pushoff = 440
 var wall_sliding_speed = 800
 var sliding_gravity = 900
 var wall_cling = false
@@ -84,7 +84,6 @@ func _physics_process(delta: float) -> void:
 	update_animation()
 	flip_sprite()
 	move_and_slide()
-	print(wall_cling)
 
 func update_acts(_delta: float) -> void:
 	pass
@@ -93,7 +92,7 @@ func grav_down(delta: float) -> void:
 	if !wall_cling:
 		velocity.y = move_toward(velocity.y, fall_speed, gravity * delta)
 	else:
-		velocity.y = 0
+		velocity.y = move_toward(velocity.y, wall_sliding_speed, sliding_gravity * delta)
 	if !is_on_floor():
 		crouching = false
 		has_jumped = false
@@ -118,7 +117,7 @@ func update_movement(delta: float) -> void:
 		else: #walking
 			velocity.x = move_toward(velocity.x, direction * speed, acceleration * delta)
 		
-		if is_on_wall_only():
+		if cling_direction != 0 and is_on_wall_only():
 			wall_cling = true
 		else:
 			wall_cling = false
@@ -144,6 +143,7 @@ func jump(delta: float) -> void:
 		else:
 			velocity.y = move_toward(velocity.y, -wall_hop_distance, wall_hop_power * delta)
 	else:
+		hop_off = false
 		jump_timer = -1
 
 func coyote_timing(delta: float) -> void:
@@ -157,9 +157,8 @@ func get_wall_direction() -> void:
 		cling_direction = -1
 	elif WallCDBRight.is_colliding() or WallCDTRight.is_colliding():
 		cling_direction = 1
-	elif !hop_off:
+	elif !hop_off and coyote_timer > 0:
 		cling_direction = 0
-	
 
 func update_animation() -> void:
 	pass
