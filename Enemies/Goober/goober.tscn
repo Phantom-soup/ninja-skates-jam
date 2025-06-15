@@ -11,7 +11,7 @@ size = Vector2(50, 48)
 atlas = ExtResource("3_atdr6")
 region = Rect2(16, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8jl7s"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_2nae5"]
 atlas = ExtResource("3_atdr6")
 region = Rect2(32, 0, 16, 16)
 
@@ -20,12 +20,17 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_uex4x")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8jl7s")
 }],
 "loop": true,
 "name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2nae5")
+}],
+"loop": true,
+"name": &"hiding",
 "speed": 5.0
 }]
 
@@ -44,6 +49,7 @@ shape = SubResource("RectangleShape2D_atdr6")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-2.98023e-08, -2.98023e-08)
 sprite_frames = SubResource("SpriteFrames_078e5")
+animation = &"hiding"
 
 [node name="ShootTimer" type="Timer" parent="."]
 

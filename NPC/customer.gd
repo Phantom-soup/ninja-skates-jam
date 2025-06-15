@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var possible_items: Array[String] = ["burger", "coca cola"]
+@export var possible_items: Array[String] = ["spaghetti", "salad"]
 var current_request: String = ""
 var player_in_range := false
 
