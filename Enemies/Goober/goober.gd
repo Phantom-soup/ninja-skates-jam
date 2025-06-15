@@ -30,7 +30,11 @@ func shoot_projectile() -> void:
 func _on_player_detector_body_entered(body: Node) -> void:
 	if body.is_in_group("player"):
 		player_too_close = true
+		$AnimatedSprite2D.play("hiding")
+		$AnimatedSprite2D.flip_h = true
 
 func _on_player_detector_body_exited(body: Node) -> void:
 	if body.is_in_group("player"):
 		player_too_close = false
+		$AnimatedSprite2D.play("default")
+		$AnimatedSprite2D.flip_h = false

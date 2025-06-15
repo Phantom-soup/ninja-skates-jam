@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=4 uid="uid://c2l1ch3n37aud"]
+[gd_scene load_steps=6 format=4 uid="uid://c2l1ch3n37aud"]
 
 [ext_resource type="Texture2D" uid="uid://r4jc7yvf0rtd" path="res://Art/ds.png" id="1_eydkl"]
 [ext_resource type="PackedScene" uid="uid://cdej1m8idku7x" path="res://Player/player.tscn" id="2_tcs6d"]
+[ext_resource type="PackedScene" uid="uid://db3dimfucjbfl" path="res://Enemies/Goober/goober.tscn" id="3_tcs6d"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nte4y"]
 texture = ExtResource("1_eydkl")
@@ -166,3 +167,6 @@ tile_set = SubResource("TileSet_6n4t1")
 
 [node name="Player" parent="." instance=ExtResource("2_tcs6d")]
 position = Vector2(12, 55)
+
+[node name="Goober" parent="." instance=ExtResource("3_tcs6d")]
+position = Vector2(-107, 38)

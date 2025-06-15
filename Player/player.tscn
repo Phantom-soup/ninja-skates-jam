@@ -29,8 +29,6 @@ offset = Vector2(0, -24)
 position = Vector2(7, -31)
 target_position = Vector2(3, 0)
 
-[node name="InvincibilityTimer" type="Timer" parent="."]
-
 [node name="WCDTL" type="RayCast2D" parent="Node2D"]
 position = Vector2(-7, -31)
 target_position = Vector2(-3, 0)
@@ -42,3 +40,5 @@ target_position = Vector2(3, 0)
 [node name="WCDBL" type="RayCast2D" parent="Node2D"]
 position = Vector2(-7, -1)
 target_position = Vector2(-3, 0)
+
+[node name="InvincibilityTimer" type="Timer" parent="."]
