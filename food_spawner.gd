@@ -6,7 +6,9 @@ var food_scenes: Dictionary = {}
 func _ready() -> void:
 	food_scenes = {
 		"spaghetti": preload("res://Food/Spaghetti/spaghetti.tscn"),
-		"salad": preload("res://Food/Salad/salad.tscn")
+		"salad": preload("res://Food/Salad/salad.tscn"),
+		"soda": preload("res://Food/Soda/soda.tscn"),
+		"cupcake": preload("res://Food/Cupcake/cupcake.tscn")
 	}
 	
 	for npc in GameManager.npc_list:

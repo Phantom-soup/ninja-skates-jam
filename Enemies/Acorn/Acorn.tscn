@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://cdbo47orvolh1"]
 
 [ext_resource type="Script" uid="uid://b5kxgawageb5v" path="res://Enemies/Acorn/acorn.gd" id="1_1x43q"]
-[ext_resource type="Texture2D" uid="uid://05xyb1nmteq8" path="res://rush_sprtes.png" id="2_1x43q"]
+[ext_resource type="Texture2D" uid="uid://btstsnyyym5mv" path="res://rush_sprtes.png" id="2_1x43q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mo8yb"]
 size = Vector2(16, 16)

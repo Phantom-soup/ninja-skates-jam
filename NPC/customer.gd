@@ -1,10 +1,12 @@
 extends Area2D
 
-@export var possible_items: Array[String] = ["spaghetti", "salad"]
+@export var possible_items: Array[String] = ["spaghetti", "salad", "soda", "cupcake"]
 @export var food_icon: Sprite2D
 @export var icon_textures: Dictionary = {
 	"spaghetti": preload("res:///spaghetti.png"),
-	"salad": preload("res:///salad.png")
+	"salad": preload("res:///salad.png"),
+	"soda": preload("res:///soda.png"),
+	"cupcake": preload("res:///cupcake.png")
 }
 
 var current_request: String = ""
@@ -25,6 +27,7 @@ func make_request() -> void:
 		current_request = possible_items[randi() % possible_items.size()]
 		can_request = true
 		has_been_talked_to = false
+		$AnimatedSprite2D.play("ordering")
 
 func _on_body_entered(body: Node) -> void:
 	if body.is_in_group("player"):
@@ -45,6 +48,7 @@ func _process(_delta: float) -> void:
 			elif current_request in GameManager.collected_items:
 				GameManager.collected_items.erase(current_request)
 				print("NPC: Thank you for the ", current_request, "!")
+				$AnimatedSprite2D.play("default")
 				can_request = false
 				current_request = ""
 				has_been_talked_to = false

@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://crw6iepbu77r1"]
+
+[ext_resource type="Script" uid="uid://ch4eqwwkwj832" path="res://Food/Soda/soda.gd" id="1_bos7s"]
+[ext_resource type="Texture2D" uid="uid://bh7gb1hl8t041" path="res://Art/rush_sprtes_npcs.png" id="2_no5m7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f8m6q"]
+atlas = ExtResource("2_no5m7")
+region = Rect2(128, 84, 16, 14)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_aqoic"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f8m6q")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2ibq0"]
+
+[node name="Soda" type="Area2D"]
+script = ExtResource("1_bos7s")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-2.84217e-14, -2.84217e-14)
+scale = Vector2(1.78571, 1.78571)
+sprite_frames = SubResource("SpriteFrames_aqoic")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_2ibq0")

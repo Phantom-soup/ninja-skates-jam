@@ -1,12 +1,37 @@
-[gd_scene load_steps=4 format=3 uid="uid://bnh0ryfsefcpl"]
+[gd_scene load_steps=7 format=3 uid="uid://bnh0ryfsefcpl"]
 
 [ext_resource type="Script" uid="uid://dnj71qghyx66a" path="res://NPC/customer.gd" id="1_jusmp"]
+[ext_resource type="Texture2D" uid="uid://bh7gb1hl8t041" path="res://Art/rush_sprtes_npcs.png" id="2_jusmp"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_53hn5"]
-load_path = "res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex"
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8iue6"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jusmp"]
 size = Vector2(34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jusmp"]
+atlas = ExtResource("2_jusmp")
+region = Rect2(16, 104, 16, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lejsd"]
+atlas = ExtResource("2_jusmp")
+region = Rect2(96, 104, 16, 26)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lejsd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jusmp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lejsd")
+}],
+"loop": true,
+"name": &"ordering",
+"speed": 5.0
+}]
 
 [node name="Customer" type="Area2D" node_paths=PackedStringArray("food_icon")]
 collision_layer = 2
@@ -14,13 +39,14 @@ collision_mask = 2
 script = ExtResource("1_jusmp")
 food_icon = NodePath("food_icon")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(1, 0, 0, 1)
-position = Vector2(1.14441e-05, 1.14441e-05)
-scale = Vector2(0.242188, 0.242188)
-texture = SubResource("CompressedTexture2D_53hn5")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_8iue6")
+shape = SubResource("RectangleShape2D_jusmp")
 
 [node name="food_icon" type="Sprite2D" parent="."]
+position = Vector2(0, -32)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 1)
+scale = Vector2(1.4375, 1.4375)
+sprite_frames = SubResource("SpriteFrames_lejsd")
+animation = &"ordering"

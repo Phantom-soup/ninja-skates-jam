@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chynnhkc2ttmj"
-path="res://.godot/imported/red-sticker-arrow-3.png-064af8a163f0c01e8b05ceef89d56149.ctex"
+uid="uid://cqd6wl6aw4so5"
+path="res://.godot/imported/spaghetti.png-5bfb5b9a8e96037c9777ff25b0584443.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://red-sticker-arrow-3.png"
-dest_files=["res://.godot/imported/red-sticker-arrow-3.png-064af8a163f0c01e8b05ceef89d56149.ctex"]
+source_file="res://spaghetti.png"
+dest_files=["res://.godot/imported/spaghetti.png-5bfb5b9a8e96037c9777ff25b0584443.ctex"]
 
 [params]
 

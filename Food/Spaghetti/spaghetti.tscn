@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bqfmik4ocs32r"]
 
 [ext_resource type="Script" uid="uid://bpusxdklyj3cr" path="res://Food/Spaghetti/spaghetti.gd" id="1_lpknb"]
-[ext_resource type="Texture2D" uid="uid://05xyb1nmteq8" path="res://rush_sprtes.png" id="2_3d84x"]
+[ext_resource type="Texture2D" uid="uid://btstsnyyym5mv" path="res://rush_sprtes.png" id="2_3d84x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nr4bl"]
 

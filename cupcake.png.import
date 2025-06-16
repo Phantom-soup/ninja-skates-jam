@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chynnhkc2ttmj"
-path="res://.godot/imported/red-sticker-arrow-3.png-064af8a163f0c01e8b05ceef89d56149.ctex"
+uid="uid://bah3qeqk8ent7"
+path="res://.godot/imported/cupcake.png-ce14b8488ffce9f584db6e8460378f1f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://red-sticker-arrow-3.png"
-dest_files=["res://.godot/imported/red-sticker-arrow-3.png-064af8a163f0c01e8b05ceef89d56149.ctex"]
+source_file="res://cupcake.png"
+dest_files=["res://.godot/imported/cupcake.png-ce14b8488ffce9f584db6e8460378f1f.ctex"]
 
 [params]
 

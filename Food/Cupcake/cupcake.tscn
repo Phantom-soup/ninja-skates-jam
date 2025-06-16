@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://bbj8oubfbbhq8"]
+
+[ext_resource type="Script" uid="uid://bc4p8pn7fkkf0" path="res://Food/Cupcake/cupcake.gd" id="1_xdpq7"]
+[ext_resource type="Texture2D" uid="uid://bh7gb1hl8t041" path="res://Art/rush_sprtes_npcs.png" id="2_8qd6k"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_usfen"]
+atlas = ExtResource("2_8qd6k")
+region = Rect2(112, 70, 16, 14)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o6psi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_usfen")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s2v6r"]
+
+[node name="Cupcake" type="Area2D"]
+script = ExtResource("1_xdpq7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_o6psi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_s2v6r")
