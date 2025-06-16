@@ -17,7 +17,7 @@ func _process(_delta):
 	
 	if targeting_npc and player:
 		target = GameManager.active_npc
-		var direction = (target.global_position - player.global_position).normalized()
+		var direction = (target.global_position - global_position).normalized()
 		rotation = direction.angle()
 	
 	if targeting_food and player:

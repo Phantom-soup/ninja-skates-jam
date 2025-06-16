@@ -1,0 +1,63 @@
+[gd_scene load_steps=10 format=3 uid="uid://d312jw04fmqs0"]
+
+[ext_resource type="Texture2D" uid="uid://chgsluj2sviu8" path="res://Art/rush_sprtes_npcs.png" id="1_8shmj"]
+[ext_resource type="Script" uid="uid://cpq51w4ogm1g8" path="res://Food/Cupcake/cupcake.gd" id="1_xdpq7"]
+[ext_resource type="Texture2D" uid="uid://b8p5x4s5stysr" path="res://Art/rush_sprites_character.png" id="3_8qd6k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xdpq7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8qd6k"]
+atlas = ExtResource("1_8shmj")
+region = Rect2(112, 70, 16, 14)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_usfen"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8qd6k")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jusmp"]
+atlas = ExtResource("3_8qd6k")
+region = Rect2(176, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ri2l7"]
+atlas = ExtResource("3_8qd6k")
+region = Rect2(192, 48, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o6psi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jusmp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ri2l7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[node name="Cupcake" type="Area2D" node_paths=PackedStringArray("up_icon")]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_xdpq7")
+up_icon = NodePath("indicator")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_xdpq7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 3)
+scale = Vector2(1.71429, 1.69643)
+sprite_frames = SubResource("SpriteFrames_usfen")
+
+[node name="indicator" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(17, -16)
+sprite_frames = SubResource("SpriteFrames_o6psi")
