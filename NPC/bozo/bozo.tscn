@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://yg3h50yx56lt"]
+
+[ext_resource type="Texture2D" uid="uid://di17rhcejir1g" path="res://Art/entity sprites/player/rush_sprites_character.png" id="1_ti6a2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mr8xl"]
+size = Vector2(38, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hjls4"]
+atlas = ExtResource("1_ti6a2")
+region = Rect2(0, 64, 48, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6x3uh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hjls4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="bozo" type="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_mr8xl")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -16)
+sprite_frames = SubResource("SpriteFrames_6x3uh")

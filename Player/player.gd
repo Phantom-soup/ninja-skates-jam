@@ -42,6 +42,8 @@ var wall_sliding_speed = 800
 var sliding_gravity = 900
 var wall_cling = false
 var cling_direction = 0
+var cling_duration = 0
+var cling_max_time = 0.15
 var hop_off = false
 
 var wall_kick_vert_power = 1500
@@ -117,14 +119,16 @@ func update_movement(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, direction * run_speed, run_acceleration * delta)
 		else: #walking
 			velocity.x = move_toward(velocity.x, direction * speed, acceleration * delta)
-		if cling_direction != 0 and is_on_wall_only():
+		if cling_direction != 0 and is_on_wall_only() and !is_on_floor():
 			wall_cling = true
-		else:
+		elif is_on_floor() or !is_on_wall():
 			wall_cling = false
 	else: #stopping
+		wall_cling = false
 		velocity.x = move_toward(velocity.x, 0, friction * delta)
 
 func jump(delta: float) -> void:
+	print(wall_cling)
 	if Input.is_action_just_pressed("A"):
 		if is_on_floor() or coyote_timer > 0:
 			velocity.y = -jump_power_initial
@@ -135,13 +139,15 @@ func jump(delta: float) -> void:
 			hop_off = true
 			velocity.y = -wall_hop_power_initial
 			velocity.x = wall_hop_pushoff * -cling_direction
+			cling_direction = 0
+			wall_cling = false
 	elif Input.is_action_pressed("A") and jump_timer > 0:
 		jump_timer -= delta
 		
-		if !hop_off:
-			velocity.y = move_toward(velocity.y, -jump_distance, jump_power * delta)
-		else:
+		if hop_off:
 			velocity.y = move_toward(velocity.y, -wall_hop_distance, wall_hop_power * delta)
+		else:
+			velocity.y = move_toward(velocity.y, -jump_distance, jump_power * delta)
 	else:
 		hop_off = false
 		jump_timer = -1
@@ -181,6 +187,8 @@ func update_acts() -> void:
 				current_act = Act.HURT
 		
 		Act.DASH: # DASH > AIR/SKATE
+			if crouching and velocity.x == 0:
+				current_act = Act.CROUCH
 			if !crouching:
 				if not is_on_floor():
 					current_act = Act.AIR
@@ -203,8 +211,13 @@ func update_acts() -> void:
 		Act.CROUCH: # CROUCH > DASH/AIR
 			if Input.is_action_just_pressed("B"):
 				current_act = Act.DASH
-			if !is_on_floor() and !Input.is_action_pressed("Down"):
+			if !is_on_floor():
 				current_act = Act.AIR
+			if !Input.is_action_pressed("Down"):
+				if velocity.x != 0:
+					current_act = Act.SKATE
+				else:
+					current_act = Act.IDLE
 			if is_knocked_back:
 				current_act = Act.HURT
 		
@@ -220,8 +233,11 @@ func update_acts() -> void:
 		
 		Act.WALLHUG: # WALLHUG > AIR/IDLE/SKATE
 			if is_on_floor():
-				current_act = Act.IDLE
-			if !is_on_floor() and !is_on_wall():
+				if velocity.x != 0:
+					current_act = Act.SKATE
+				else:
+					current_act = Act.IDLE
+			if is_on_wall_only() and direction == 0 or Input.is_action_just_pressed("A") or !is_on_wall():
 				current_act = Act.AIR
 			if is_knocked_back:
 				current_act = Act.HURT
@@ -241,7 +257,7 @@ func update_animation() -> void:
 		Act.HURT:
 			Animator.play("hurt")
 		Act.WALLHUG:
-			pass
+			Animator.play("cling")
 
 func flip_sprite() -> void:
 	if direction > 0:

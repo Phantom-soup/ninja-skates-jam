@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cdej1m8idku7x"]
+[gd_scene load_steps=15 format=3 uid="uid://cdej1m8idku7x"]
 
 [ext_resource type="Script" uid="uid://bx8l1ynlsevif" path="res://Player/player.gd" id="1_l8h54"]
 [ext_resource type="Texture2D" uid="uid://d4bndapidedyy" path="res://Art/entity sprites/player/rush_playewalk_spritesheet.png" id="2_4ntmi"]
@@ -10,6 +10,10 @@ size = Vector2(14, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_vtle1"]
 atlas = ExtResource("2_btcbx")
 region = Rect2(0, 128, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_apopc"]
+atlas = ExtResource("2_btcbx")
+region = Rect2(192, 160, 48, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_od3ui"]
 atlas = ExtResource("2_btcbx")
@@ -47,6 +51,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"air",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_apopc")
+}],
+"loop": true,
+"name": &"cling",
 "speed": 5.0
 }, {
 "frames": [{
@@ -112,7 +124,7 @@ debug_color = Color(0.566402, 0.468855, 0.792586, 0.42)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_vtle1")
-animation = &"hurt"
+animation = &"cling"
 autoplay = "idle"
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -121,19 +133,19 @@ offset = Vector2(0, -24)
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="WCDTR" type="RayCast2D" parent="Node2D"]
-position = Vector2(7, -31)
+position = Vector2(6, -31)
 target_position = Vector2(3, 0)
 
 [node name="WCDTL" type="RayCast2D" parent="Node2D"]
-position = Vector2(-7, -31)
+position = Vector2(-6, -31)
 target_position = Vector2(-3, 0)
 
 [node name="WCDBR" type="RayCast2D" parent="Node2D"]
-position = Vector2(7, -1)
+position = Vector2(6, -1)
 target_position = Vector2(3, 0)
 
 [node name="WCDBL" type="RayCast2D" parent="Node2D"]
-position = Vector2(-7, -1)
+position = Vector2(-6, -1)
 target_position = Vector2(-3, 0)
 
 [node name="InvincibilityTimer" type="Timer" parent="."]
