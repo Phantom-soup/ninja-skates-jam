@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bqfmik4ocs32r"]
+[gd_scene load_steps=10 format=3 uid="uid://bqfmik4ocs32r"]
 
 [ext_resource type="Script" uid="uid://bpusxdklyj3cr" path="res://Food/Spaghetti/spaghetti.gd" id="1_lpknb"]
+
 [ext_resource type="Texture2D" uid="uid://bduiv5cbn5kel" path="res://Art/entity sprites/rush_sprtes_npcs.png" id="2_6s48d"]
+
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nr4bl"]
 
@@ -20,10 +22,33 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Spaghetti" type="Area2D"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_jusmp"]
+atlas = ExtResource("3_lvogf")
+region = Rect2(176, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ri2l7"]
+atlas = ExtResource("3_lvogf")
+region = Rect2(192, 48, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4cjmr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jusmp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ri2l7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[node name="Spaghetti" type="Area2D" node_paths=PackedStringArray("up_icon")]
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_lpknb")
+up_icon = NodePath("indicator")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_nr4bl")
@@ -32,3 +57,8 @@ shape = SubResource("RectangleShape2D_nr4bl")
 position = Vector2(0, -7)
 scale = Vector2(1.34375, 1.34375)
 sprite_frames = SubResource("SpriteFrames_mamni")
+
+[node name="indicator" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(12, -24)
+sprite_frames = SubResource("SpriteFrames_4cjmr")
