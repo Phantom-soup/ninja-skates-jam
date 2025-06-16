@@ -4,11 +4,14 @@ var collected_items: = {}
 var npc_list: Array[Node] = []
 var active_npc: Node = null
 
-var start_time: float = 60.0
+var start_time: float = 45.0
 var remaining_time: float
 var game_over: bool = false
 
 @onready var timer_label: Label
+@onready var orders_label: Label
+
+var orders_taken: int
 
 func register_npc(npc: Node) -> void:
 	npc_list.append(npc)
@@ -29,6 +32,9 @@ func assign_new_requester() -> void:
 func set_timer_label(label: Label) -> void:
 	timer_label = label
 
+func set_orders_label(label: Label) -> void:
+	orders_label = label
+
 func _ready():
 	remaining_time = start_time
 	
@@ -43,6 +49,7 @@ func _process(delta: float) -> void:
 		end_game()
 		
 	timer_label.text = "Time: " + str(int(round(remaining_time)))
+	orders_label.text = "Orders: " + str(orders_taken)
 
 func add_time(seconds: float) -> void:
 	remaining_time += seconds
