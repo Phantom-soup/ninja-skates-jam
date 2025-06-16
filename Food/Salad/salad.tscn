@@ -20,7 +20,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Coca Cola" type="Area2D"]
+[node name="Salad" type="Area2D"]
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_it5hg")
