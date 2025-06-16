@@ -1,10 +1,23 @@
-[gd_scene load_steps=9 format=3 uid="uid://cdej1m8idku7x"]
+[gd_scene load_steps=13 format=3 uid="uid://cdej1m8idku7x"]
 
 [ext_resource type="Script" uid="uid://bx8l1ynlsevif" path="res://Player/player.gd" id="1_l8h54"]
 [ext_resource type="Texture2D" uid="uid://d4bndapidedyy" path="res://Art/entity sprites/player/rush_playewalk_spritesheet.png" id="2_4ntmi"]
+[ext_resource type="Texture2D" uid="uid://di17rhcejir1g" path="res://Art/entity sprites/player/rush_sprites_character.png" id="2_btcbx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ntmi"]
 size = Vector2(14, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vtle1"]
+atlas = ExtResource("2_btcbx")
+region = Rect2(0, 140, 37, 35)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_od3ui"]
+atlas = ExtResource("2_btcbx")
+region = Rect2(44, 132, 35, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_00tjw"]
+atlas = ExtResource("2_btcbx")
+region = Rect2(0, 129, 36, 43)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_btcbx"]
 atlas = ExtResource("2_4ntmi")
@@ -26,10 +39,34 @@ region = Rect2(0, 96, 22, 32)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_vtle1")
+}],
+"loop": true,
+"name": &"air",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_od3ui")
+}],
+"loop": true,
+"name": &"crouch",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_00tjw")
+}],
+"loop": true,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_btcbx")
 }],
 "loop": true,
-"name": &"default",
+"name": &"idle",
 "speed": 5.0
 }, {
 "frames": [{
@@ -61,10 +98,10 @@ shape = SubResource("RectangleShape2D_4ntmi")
 debug_color = Color(0.566402, 0.468855, 0.792586, 0.42)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(2, -16)
+position = Vector2(0, -18)
 sprite_frames = SubResource("SpriteFrames_vtle1")
-animation = &"skate"
-frame_progress = 0.363141
+animation = &"hurt"
+autoplay = "idle"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(0, -24)
