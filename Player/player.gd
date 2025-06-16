@@ -64,6 +64,10 @@ func _ready():
 	print("Label reference:", $Timer)
 	GameManager.set_timer_label($Timer)
 
+func _ready():
+	print("Label reference:", $Timer)
+	GameManager.set_timer_label($Timer)
+
 func _unhandled_input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("B"):
 		if crouching:

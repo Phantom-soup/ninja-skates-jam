@@ -7,8 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://cdbo47orvolh1" path="res://Enemies/Acorn/Acorn.tscn" id="4_nte4y"]
 [ext_resource type="PackedScene" uid="uid://cmcsf83nk6pu0" path="res://Enemies/Dapper/Dapper.tscn" id="5_6n4t1"]
 [ext_resource type="PackedScene" uid="uid://bnh0ryfsefcpl" path="res://NPC/customer.tscn" id="6_o0yeo"]
-[ext_resource type="Script" path="res://food_spawner.gd" id="9_b7djy"]
-[ext_resource type="Script" path="res://pointer.gd" id="9_cxscl"]
+[ext_resource type="Script" uid="uid://1ei2xpdxlk3p" path="res://food_spawner.gd" id="9_b7djy"]
+[ext_resource type="Script" uid="uid://ce3aykwb8fa6h" path="res://pointer.gd" id="9_cxscl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tcs6d"]
 texture = ExtResource("1_eydkl")
