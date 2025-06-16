@@ -4,6 +4,7 @@ extends CharacterBody2D
 @onready var WallCDTLeft = $Node2D/WCDTL
 @onready var WallCDBRight = $Node2D/WCDBR
 @onready var WallCDBLeft = $Node2D/WCDBL
+@onready var Animator = $AnimatedSprite2D
 
 var fall_speed = 1000
 var gravity = 1100
@@ -56,9 +57,12 @@ var knockback_duration: float = 0.3
 var knockback_timer: float = 0.0
 var knockback_vector: Vector2 = Vector2.ZERO
 
-enum Act{IDLE, WALK, RUN, JUMPING, FALLING, WALLHUG, CROUCH, SLIDE, SPINATTACK}
+enum Act{IDLE, SKATE, AIR, WALLHUG}
 var current_act: Act = Act.IDLE
-var previous_act: Act = Act.IDLE
+
+func _ready():
+	print("Label reference:", $Timer)
+	GameManager.set_timer_label($Timer)
 
 func _ready():
 	print("Label reference:", $Timer)
@@ -84,13 +88,10 @@ func _physics_process(delta: float) -> void:
 	get_wall_direction()
 	jump(delta)
 	coyote_timing(delta)
-	update_acts(delta)
+	update_acts()
 	update_animation()
 	flip_sprite()
 	move_and_slide()
-
-func update_acts(_delta: float) -> void:
-	pass
 
 func grav_down(delta: float) -> void:
 	if !wall_cling:
@@ -120,7 +121,6 @@ func update_movement(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, direction * run_speed, run_acceleration * delta)
 		else: #walking
 			velocity.x = move_toward(velocity.x, direction * speed, acceleration * delta)
-		
 		if cling_direction != 0 and is_on_wall_only():
 			wall_cling = true
 		else:
@@ -162,11 +162,39 @@ func get_wall_direction() -> void:
 	elif WallCDBRight.is_colliding() or WallCDTRight.is_colliding():
 		cling_direction = 1
 
+func update_acts() -> void:
+	print(velocity.x)
+	match current_act:
+		Act.IDLE:
+			if velocity.x != 0:
+				current_act = Act.SKATE
+		
+		Act.SKATE:
+			if velocity.x == 0:
+				current_act = Act.IDLE
+			if not is_on_floor():
+				current_act = Act.AIR
+		
+		Act.AIR:
+			if is_on_floor():
+				current_act = Act.SKATE
+
 func update_animation() -> void:
-	pass
+	match current_act:
+		Act.IDLE:
+			Animator.play("idle")
+		Act.SKATE:
+			Animator.play("skate")
+		Act.AIR:
+			pass
+		Act.WALLHUG:
+			pass
 
 func flip_sprite() -> void:
-	pass
+	if direction < 0:
+		Animator.scale.x
+	else:
+		Animator.flip_h
 
 func take_knockback(strength: float = 100.0, vertical_boost: float = -300.0) -> void:
 	if is_knocked_back:

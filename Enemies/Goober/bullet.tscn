@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dkm1abxcx3nh1"]
 
 [ext_resource type="Script" uid="uid://d3ifumu8nr1gm" path="res://Enemies/Goober/bullet.gd" id="1_8ajuh"]
-[ext_resource type="Texture2D" uid="uid://05xyb1nmteq8" path="res://rush_sprtes.png" id="2_ph5qa"]
+[ext_resource type="Texture2D" uid="uid://chgsluj2sviu8" path="res://Art/rush_sprtes_npcs.png" id="2_ph5qa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0shvb"]
 size = Vector2(9, 8)
