@@ -1,7 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://cdbo47orvolh1"]
+[gd_scene load_steps=7 format=3 uid="uid://cdbo47orvolh1"]
 
 [ext_resource type="Script" uid="uid://b5kxgawageb5v" path="res://Enemies/Acorn/acorn.gd" id="1_1x43q"]
-[ext_resource type="Texture2D" uid="uid://c1nelce183wfk" path="res://rush_sprtes.png" id="2_1x43q"]
+[ext_resource type="Texture2D" uid="uid://chgsluj2sviu8" path="res://Art/rush_sprtes_npcs.png" id="2_1x43q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mo8yb"]
 size = Vector2(16, 16)
@@ -10,18 +10,11 @@ size = Vector2(16, 16)
 atlas = ExtResource("2_1x43q")
 region = Rect2(16, 16, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tdfwh"]
-atlas = ExtResource("2_1x43q")
-region = Rect2(32, 16, 16, 16)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_1nskl"]
 animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jq62t")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tdfwh")
 }],
 "loop": true,
 "name": &"default",
