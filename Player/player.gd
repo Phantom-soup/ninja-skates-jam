@@ -24,7 +24,7 @@ var running = false
 var crawl_speed = 350
 var crawl_acceleration = 500
 var crouching = false
-var sliding_speed = 410
+var sliding_speed = 600
 var sliding = false
 
 var jump_power_initial = 175
@@ -57,11 +57,10 @@ var knockback_duration: float = 0.3
 var knockback_timer: float = 0.0
 var knockback_vector: Vector2 = Vector2.ZERO
 
-enum Act{IDLE, SKATE, AIR, WALLHUG}
+enum Act{IDLE, SKATE, DASH, AIR, WALLHUG, CROUCH, HURT}
 var current_act: Act = Act.IDLE
 
 func _ready():
-	print("Label reference:", $Timer)
 	GameManager.set_timer_label($Timer)
 
 func _unhandled_input(_event: InputEvent) -> void:
@@ -159,21 +158,72 @@ func get_wall_direction() -> void:
 		cling_direction = 1
 
 func update_acts() -> void:
-	print(velocity.x)
 	match current_act:
-		Act.IDLE:
+		Act.IDLE: # IDLE > SKATE/AIR/CROUCH
+			if is_knocked_back:
+				current_act = Act.HURT
 			if velocity.x != 0:
 				current_act = Act.SKATE
+			if not is_on_floor():
+				current_act = Act.AIR
+			if crouching:
+				current_act = Act.CROUCH
 		
-		Act.SKATE:
+		Act.SKATE: # SKATE . IDLE/AIR/CROUCH
 			if velocity.x == 0:
 				current_act = Act.IDLE
 			if not is_on_floor():
 				current_act = Act.AIR
+			if crouching:
+				current_act = Act.CROUCH
+			if is_knocked_back:
+				current_act = Act.HURT
 		
-		Act.AIR:
+		Act.DASH: # DASH > AIR/SKATE
+			if !crouching:
+				if not is_on_floor():
+					current_act = Act.AIR
+				else:
+					current_act = Act.SKATE
+			if is_knocked_back:
+				current_act = Act.HURT
+		
+		Act.AIR: # AIR > SKATE/IDLE/WALLHUG
 			if is_on_floor():
-				current_act = Act.SKATE
+				if velocity.x != 0:
+					current_act = Act.SKATE
+				else:
+					current_act = Act.IDLE
+			if wall_cling and !is_on_floor():
+				current_act = Act.WALLHUG
+			if is_knocked_back:
+				current_act = Act.HURT
+		
+		Act.CROUCH: # CROUCH > DASH/AIR
+			if Input.is_action_just_pressed("B"):
+				current_act = Act.DASH
+			if !is_on_floor() and !Input.is_action_pressed("Down"):
+				current_act = Act.AIR
+			if is_knocked_back:
+				current_act = Act.HURT
+		
+		Act.HURT:
+			if knockback_timer < 0:
+				if is_on_floor():
+					if velocity.x != 0:
+						current_act = Act.SKATE
+					else:
+						current_act = Act.IDLE
+				if wall_cling and !is_on_floor():
+					current_act = Act.WALLHUG
+		
+		Act.WALLHUG: # WALLHUG > AIR/IDLE/SKATE
+			if is_on_floor():
+				current_act = Act.IDLE
+			if !is_on_floor() and !is_on_wall():
+				current_act = Act.AIR
+			if is_knocked_back:
+				current_act = Act.HURT
 
 func update_animation() -> void:
 	match current_act:
@@ -181,16 +231,22 @@ func update_animation() -> void:
 			Animator.play("idle")
 		Act.SKATE:
 			Animator.play("skate")
+		Act.DASH:
+			Animator.play("dash")
 		Act.AIR:
-			pass
+			Animator.play("air")
+		Act.CROUCH:
+			Animator.play("crouch")
+		Act.HURT:
+			Animator.play("hurt")
 		Act.WALLHUG:
 			pass
 
 func flip_sprite() -> void:
+	if direction > 0:
+		Animator.flip_h = false
 	if direction < 0:
-		Animator.scale.x
-	else:
-		Animator.flip_h
+		Animator.flip_h = true
 
 func take_knockback(strength: float = 100.0, vertical_boost: float = -300.0) -> void:
 	if is_knocked_back:

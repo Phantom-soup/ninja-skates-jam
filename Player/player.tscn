@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cdej1m8idku7x"]
+[gd_scene load_steps=14 format=3 uid="uid://cdej1m8idku7x"]
 
 [ext_resource type="Script" uid="uid://bx8l1ynlsevif" path="res://Player/player.gd" id="1_l8h54"]
 [ext_resource type="Texture2D" uid="uid://d4bndapidedyy" path="res://Art/entity sprites/player/rush_playewalk_spritesheet.png" id="2_4ntmi"]
@@ -9,27 +9,31 @@ size = Vector2(14, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vtle1"]
 atlas = ExtResource("2_btcbx")
-region = Rect2(0, 140, 37, 35)
+region = Rect2(0, 128, 48, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_od3ui"]
 atlas = ExtResource("2_btcbx")
-region = Rect2(44, 132, 35, 44)
+region = Rect2(48, 128, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x3vf3"]
+atlas = ExtResource("2_btcbx")
+region = Rect2(144, 128, 48, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_00tjw"]
 atlas = ExtResource("2_btcbx")
-region = Rect2(0, 129, 36, 43)
+region = Rect2(96, 128, 48, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_btcbx"]
 atlas = ExtResource("2_4ntmi")
 region = Rect2(0, 0, 22, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_gwnis"]
-atlas = ExtResource("2_4ntmi")
-region = Rect2(0, 32, 22, 32)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_k53q1"]
 atlas = ExtResource("2_4ntmi")
 region = Rect2(0, 64, 22, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gwnis"]
+atlas = ExtResource("2_4ntmi")
+region = Rect2(0, 32, 22, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fhl08"]
 atlas = ExtResource("2_4ntmi")
@@ -55,6 +59,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_x3vf3")
+}],
+"loop": true,
+"name": &"dash",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_00tjw")
 }],
 "loop": true,
@@ -70,6 +82,9 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k53q1")
+}, {
 "duration": 2.0,
 "texture": SubResource("AtlasTexture_gwnis")
 }, {
@@ -78,9 +93,6 @@ animations = [{
 }, {
 "duration": 2.0,
 "texture": SubResource("AtlasTexture_fhl08")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_k53q1")
 }],
 "loop": true,
 "name": &"skate",
@@ -98,7 +110,7 @@ shape = SubResource("RectangleShape2D_4ntmi")
 debug_color = Color(0.566402, 0.468855, 0.792586, 0.42)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -18)
+position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_vtle1")
 animation = &"hurt"
 autoplay = "idle"

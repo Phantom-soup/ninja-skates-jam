@@ -1,19 +1,19 @@
 [gd_scene load_steps=6 format=3 uid="uid://c1f6bphsrj08h"]
 
 [ext_resource type="Script" uid="uid://dmsdfgmm08gtx" path="res://Food/Salad/salad.gd" id="1_it5hg"]
-[ext_resource type="Texture2D" uid="uid://05xyb1nmteq8" path="res://rush_sprtes.png" id="2_5pi3v"]
+[ext_resource type="Texture2D" uid="uid://bduiv5cbn5kel" path="res://Art/entity sprites/rush_sprtes_npcs.png" id="2_hsfhs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nr4bl"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0y2de"]
-atlas = ExtResource("2_5pi3v")
-region = Rect2(96, 16, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_rox64"]
+atlas = ExtResource("2_hsfhs")
+region = Rect2(112, 84, 16, 14)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_66e7e"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_0y2de")
+"texture": SubResource("AtlasTexture_rox64")
 }],
 "loop": true,
 "name": &"default",

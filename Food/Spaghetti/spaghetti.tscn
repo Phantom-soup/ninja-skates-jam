@@ -1,19 +1,19 @@
 [gd_scene load_steps=6 format=3 uid="uid://bqfmik4ocs32r"]
 
 [ext_resource type="Script" uid="uid://bpusxdklyj3cr" path="res://Food/Spaghetti/spaghetti.gd" id="1_lpknb"]
-[ext_resource type="Texture2D" uid="uid://05xyb1nmteq8" path="res://rush_sprtes.png" id="2_3d84x"]
+[ext_resource type="Texture2D" uid="uid://bduiv5cbn5kel" path="res://Art/entity sprites/rush_sprtes_npcs.png" id="2_6s48d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nr4bl"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_i2034"]
-atlas = ExtResource("2_3d84x")
-region = Rect2(112, 0, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_lvogf"]
+atlas = ExtResource("2_6s48d")
+region = Rect2(128, 70, 16, 14)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_mamni"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_i2034")
+"texture": SubResource("AtlasTexture_lvogf")
 }],
 "loop": true,
 "name": &"default",
