@@ -1,9 +1,14 @@
-[gd_scene load_steps=7 format=4 uid="uid://c2l1ch3n37aud"]
-
+[gd_scene load_steps=14 format=4 uid="uid://c2l1ch3n37aud"]
 
 [ext_resource type="Texture2D" uid="uid://2e236135a2qh" path="res://Art/rush-hour_sprte_world.png" id="1_eydkl"]
 [ext_resource type="PackedScene" uid="uid://cdej1m8idku7x" path="res://Player/player.tscn" id="2_tcs6d"]
+[ext_resource type="Texture2D" uid="uid://1lxhuut62bt6" path="res://red-sticker-arrow-3.png" id="3_b7djy"]
 [ext_resource type="PackedScene" uid="uid://db3dimfucjbfl" path="res://Enemies/Goober/goober.tscn" id="3_tcs6d"]
+[ext_resource type="PackedScene" uid="uid://cdbo47orvolh1" path="res://Enemies/Acorn/Acorn.tscn" id="4_nte4y"]
+[ext_resource type="PackedScene" uid="uid://cmcsf83nk6pu0" path="res://Enemies/Dapper/Dapper.tscn" id="5_6n4t1"]
+[ext_resource type="PackedScene" uid="uid://bnh0ryfsefcpl" path="res://NPC/customer.tscn" id="6_o0yeo"]
+[ext_resource type="Script" uid="uid://1ei2xpdxlk3p" path="res://food_spawner.gd" id="9_b7djy"]
+[ext_resource type="Script" uid="uid://ce3aykwb8fa6h" path="res://pointer.gd" id="9_cxscl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tcs6d"]
 texture = ExtResource("1_eydkl")
@@ -187,7 +192,63 @@ tile_map_data = PackedByteArray("AAAKAAcAAAANAAIAAAAKAAYAAAANAAIAAAAKAAUAAAANAAI
 tile_set = SubResource("TileSet_6n4t1")
 
 [node name="Player" parent="." instance=ExtResource("2_tcs6d")]
-position = Vector2(12, 55)
+position = Vector2(0, 64)
+
+[node name="Timer" type="Label" parent="Player"]
+anchors_preset = -1
+anchor_left = -0.387
+anchor_top = -0.26
+anchor_right = -0.387
+anchor_bottom = -0.26
+offset_left = -119.0
+offset_top = -138.0
+offset_right = -79.0
+offset_bottom = -115.0
+text = "Time"
+
+[node name="Sprite2D" type="Sprite2D" parent="Player" node_paths=PackedStringArray("player", "spawn_point")]
+position = Vector2(0, -43)
+scale = Vector2(0.0141014, 0.0141014)
+texture = ExtResource("3_b7djy")
+script = ExtResource("9_cxscl")
+player = NodePath("..")
+spawn_point = NodePath("../../Food Spawner/FoodSpawnPoint")
 
 [node name="Goober" parent="." instance=ExtResource("3_tcs6d")]
-position = Vector2(-107, 38)
+position = Vector2(-982, 472)
+
+[node name="Acorn" parent="." instance=ExtResource("4_nte4y")]
+position = Vector2(-775, -580)
+
+[node name="Dapper" parent="." instance=ExtResource("5_6n4t1")]
+position = Vector2(24, -539)
+waypoints = Array[Vector2]([Vector2(24, -539), Vector2(24, -376)])
+
+[node name="Acorn2" parent="." instance=ExtResource("4_nte4y")]
+position = Vector2(476, -327)
+
+[node name="Goober2" parent="." instance=ExtResource("3_tcs6d")]
+position = Vector2(396, 88)
+
+[node name="Dapper2" parent="." instance=ExtResource("5_6n4t1")]
+position = Vector2(-372, 476)
+waypoints = Array[Vector2]([Vector2(-372, 476), Vector2(154, 584)])
+
+[node name="Customer" parent="." instance=ExtResource("6_o0yeo")]
+position = Vector2(882, -497)
+
+[node name="Customer2" parent="." instance=ExtResource("6_o0yeo")]
+position = Vector2(-978, -527)
+
+[node name="Customer3" parent="." instance=ExtResource("6_o0yeo")]
+position = Vector2(-514, 321)
+
+[node name="Customer4" parent="." instance=ExtResource("6_o0yeo")]
+position = Vector2(450, 705)
+
+[node name="Food Spawner" type="Node" parent="." node_paths=PackedStringArray("spawn_point")]
+script = ExtResource("9_b7djy")
+spawn_point = NodePath("FoodSpawnPoint")
+
+[node name="FoodSpawnPoint" type="Marker2D" parent="Food Spawner"]
+position = Vector2(0, 52)
