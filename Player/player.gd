@@ -60,6 +60,10 @@ enum Act{IDLE, WALK, RUN, JUMPING, FALLING, WALLHUG, CROUCH, SLIDE, SPINATTACK}
 var current_act: Act = Act.IDLE
 var previous_act: Act = Act.IDLE
 
+func _ready():
+	print("Label reference:", $Timer)
+	GameManager.set_timer_label($Timer)
+
 func _unhandled_input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("B"):
 		if crouching:
