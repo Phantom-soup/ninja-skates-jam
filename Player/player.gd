@@ -161,8 +161,6 @@ func get_wall_direction() -> void:
 		cling_direction = -1
 	elif WallCDBRight.is_colliding() or WallCDTRight.is_colliding():
 		cling_direction = 1
-	elif !hop_off and coyote_timer > 0:
-		cling_direction = 0
 
 func update_animation() -> void:
 	pass
